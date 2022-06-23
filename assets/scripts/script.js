@@ -75,7 +75,7 @@ function askForLength(minLength, maxLength) {
 }
 
 function askForCharacter(characterType) {
-  return window.confirm("Include " + characterType + "? (OK for yes, cancel for no)");
+  return window.confirm("Include " + characterType + "? (OK for yes, Cancel for no)");
 }
 
 function passwordGeneration(length, lowercase, uppercase, numbers, special) {
@@ -85,35 +85,27 @@ function passwordGeneration(length, lowercase, uppercase, numbers, special) {
   // Create a character class to hold all the chosen characters
   var allCharacters = "";
 
-  // For every character class, grab a character, increment the count, add that class to our complete set
-  if (lowercase) {
-     myCharacters += getCharacter(letters);
-     characterCount++;
+  // Grab a character, increment the count, add that class to our complete set
+  // Made this a lambda for code reuse
+  let chooseFromCharacterSet = (charSet) => {
+    myCharacters += getCharacter(charSet);
+    characterCount++;
+    allCharacters += charSet;
+  }
 
-     allCharacters += letters;
+  // For every character class
+  if (lowercase) {
+    chooseFromCharacterSet(letters);
   }
   if (uppercase) {
-    myCharacters += getCharacter(letters.toUpperCase());
-    characterCount++;
-
-    allCharacters += letters.toUpperCase();
+    chooseFromCharacterSet(letters.toUpperCase());
   }
   if (numbers) {
-    myCharacters += getCharacter(numericCharacters);
-    characterCount++;
-
-    allCharacters += numericCharacters;
+    chooseFromCharacterSet(numericCharacters);
   }
   if (special) {
-    myCharacters += getCharacter(specialCharacters);
-    characterCount++;
-
-    allCharacters += specialCharacters;
+    chooseFromCharacterSet(specialCharacters);
   }
-
-  myLog("Chosen length", length);
-  myLog("Character count", characterCount);
-  myLog("My chosen characters", myCharacters);
 
   // Fill out remaining characters with random characters from the set we've built
   while (characterCount < length) {
