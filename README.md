@@ -1,10 +1,11 @@
-# Boot Camp Challenge 3
+# Boot Camp Challenge 3 - Password Generator
 ![Screenshot of the website](docs/images/site-screenshot.png)
 
 Description
 =====
 An exercise to create a password generator using JavaScript. Users can select a password length and a variety of different character classes to include in the final password. Characters from each character class are chosen randomly and positioned randomly in the final password.
 
+## Algorithm
 The generation algorithm works as follows:
 1. The user chooses a password length between 8 and 128 characters (inclusive)
 2. The user is asked whether to include each of the following (in order):
