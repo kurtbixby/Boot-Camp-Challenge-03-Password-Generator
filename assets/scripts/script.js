@@ -148,7 +148,7 @@ function shuffleCharacters(characterSet) {
     characterArray.splice(charIndex, 1);
   }
 
-  return finalPassword
+  return finalPassword;
 }
 
 // Add event listener to generate button
