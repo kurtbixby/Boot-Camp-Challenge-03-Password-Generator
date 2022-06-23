@@ -21,7 +21,7 @@ function writePassword() {
 }
 
 // Character classes used in password generation
-var specialCharacters = " !\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
+var specialCharacters = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
 var numericCharacters = "0123456789";
 var letters = "abcdefghijklmnopqrstuvwxyz";
 
