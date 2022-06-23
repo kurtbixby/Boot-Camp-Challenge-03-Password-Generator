@@ -39,8 +39,8 @@ function generatePassword() {
 
   // No character sets
   if (!(lowercase || uppercase || numbers || special)) {
-    window.alert("Invalid password format. Please select at least one character class for your password.");
-    return ""
+    window.alert("Invalid password format. Please try again and select at least one character class for your password.");
+    return null
   }
 
   var generatedPassword = passwordGeneration(length, lowercase, uppercase, numbers, special);
@@ -50,24 +50,24 @@ function generatePassword() {
 function askForLength(minLength, maxLength) {
   var lengthInput = window.prompt("How long would you like your password? (Between " + minLength + " and " + maxLength +  " characters)");
   if (typeof lengthInput !== 'string') {
-    window.alert(lengthInput + " is not a number. Please enter a number.")
+    window.alert(lengthInput + " is not a number. Please try again and enter a number.")
     return null;
   }
 
   var numInput = Number(lengthInput);
   if (!Number.isInteger(numInput)) {
-    window.alert(numInput + " is not an integer. Please enter an integer.")
+    window.alert(numInput + " is not an integer. Please try again and enter an integer.")
     return null;
   }
 
   var inputInt = Number.parseInt(lengthInput);
   // Input is an integer
   if (inputInt < minLength) {
-    window.alert(inputInt + " is smaller than " + minLength + ". Please enter a number between " + minLength + " and " + maxLength + ".");
+    window.alert(inputInt + " is smaller than " + minLength + ". Please try again and enter a number between " + minLength + " and " + maxLength + ".");
     return null;
   }
   if (maxLength < inputInt) {
-    window.alert(inputInt + " is larger than " + maxLength + ". Please enter a number between " + minLength + " and " + maxLength + ".");
+    window.alert(inputInt + " is larger than " + maxLength + ". Please try again and enter a number between " + minLength + " and " + maxLength + ".");
     return null;
   }
 
@@ -75,7 +75,7 @@ function askForLength(minLength, maxLength) {
 }
 
 function askForCharacter(characterType) {
-  return window.confirm("Do you want to include " + characterType + "?");
+  return window.confirm("Include " + characterType + "? (OK for yes, cancel for no)");
 }
 
 function passwordGeneration(length, lowercase, uppercase, numbers, special) {
@@ -115,25 +115,31 @@ function passwordGeneration(length, lowercase, uppercase, numbers, special) {
   myLog("Character count", characterCount);
   myLog("My chosen characters", myCharacters);
 
+  // Fill out remaining characters with random characters from the set we've built
   while (characterCount < length) {
     myCharacters += getCharacter(allCharacters);
     characterCount++;
   }
 
-  var characterArray = Array.from(myCharacters);
+  return buildPassword(myCharacters);
+}
+
+function getCharacter(characterSet) {
+  var charIndex = Math.floor(Math.random() * characterSet.length);
+  return characterSet.charAt(charIndex);
+}
+
+function buildPassword(characterSet) {
   var finalPassword = "";
+
+  var characterArray = Array.from(characterSet);
   while (characterArray.length != 0) {
     var charIndex = Math.floor(Math.random() * characterArray.length);
     finalPassword += characterArray[charIndex];
     characterArray.splice(charIndex, 1);
   }
 
-  return finalPassword;
-}
-
-function getCharacter(characterSet) {
-  var charIndex = Math.floor(Math.random() * characterSet.length);
-  return characterSet.charAt(charIndex);
+  return finalPassword
 }
 
 // Add event listener to generate button
