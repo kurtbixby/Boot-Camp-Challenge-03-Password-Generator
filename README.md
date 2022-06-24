@@ -1,4 +1,4 @@
-# Boot Camp Challenge 3 - Password Generator
+# JavaScript Password Generator
 ![Screenshot of the website](docs/images/site-screenshot.png)
 
 Description
